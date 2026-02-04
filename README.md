@@ -11,6 +11,37 @@ A professional, self-hosted Laravel application for managing client approvals an
 
 ---
 
+## 📸 Application Screenshots
+
+<table>
+<tr>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/01-dashboard.png" width="450" /></td>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/02-client-management.png" width="450" /></td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/03-view-client.png" width="450" /></td>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/04-approval-requests.png" width="450" /></td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/05-view-approval-requests.png" width="450" /></td>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/06-activity-history.png" width="450" /></td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/07-email-templates.png" width="450" /></td>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/08-user-management.png" width="450" /></td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/09-user-profile-management.png" width="450" /></td>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/10-role-management.png" width="450" /></td>
+</tr>
+<tr>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/11-role-details.png" width="450" /></td>
+<td><img src="https://raw.githubusercontent.com/ashokdubariya/laravel-casms/main/screenshots/12-edit-role.png" width="450" /></td>
+</tr>
+</table>
+
+---
+
 ## Table of Contents
 
 - [What This Is](#what-this-is)
