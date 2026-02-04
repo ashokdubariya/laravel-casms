@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Client Approval & Sign-Off Management System</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap&subset=latin" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1a425f',
+                        'approval-green': '#85c34e',
+                        'dark-text': '#0F172A',
+                        'light-bg': '#F8FAFC',
+                        'border-gray': '#CBD5E1',
+                    },
+                    fontFamily: {
+                        sans: ['SN Pro', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1a425f 0%, #0f2a3d 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .feature-icon { background: linear-gradient(135deg, #85c34e 0%, #6ea63e 100%); }
+    </style>
+</head>
+<body class="bg-light-bg">
+    <!-- Header/Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-4">
+                    <img src="images/casms-logo.png" alt="Logo" class="h-12">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="home.html" class="text-primary-blue border-b-2 border-primary-blue pb-1">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="installation.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-download mr-2"></i>Installation Guide
+                    </a>
+                    <a href="user-guide.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-user mr-2"></i>User Guide
+                    </a>
+                    <a href="admin-guide.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-user-shield mr-2"></i>Admin Guide
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary-blue">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-3 space-y-2">
+                <a href="home.html" class="block px-4 py-2 text-primary-blue bg-blue-50 rounded">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="installation.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded">
+                    <i class="fas fa-download mr-2"></i>Installation Guide
+                </a>
+                <a href="user-guide.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded">
+                    <i class="fas fa-user mr-2"></i>User Guide
+                </a>
+                <a href="admin-guide.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded">
+                    <i class="fas fa-user-shield mr-2"></i>Admin Guide
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-5xl mb-6">Welcome to Client Approval & Sign-Off Management System Documentation</h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                A comprehensive guide to help you install, configure, and master the Client Approval Management System.
+            </p>
+            <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                Everything you need to streamline your approval workflows.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="installation.html" class="inline-flex items-center px-8 py-4 bg-approval-green text-white rounded-lg hover:bg-opacity-90 transition shadow-lg">
+                    <i class="fas fa-rocket mr-3"></i>Get Started
+                </a>
+                <a href="#features" class="inline-flex items-center px-8 py-4 bg-white text-primary-blue rounded-lg hover:bg-gray-100 transition shadow-lg">
+                    <i class="fas fa-book mr-3"></i>Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center p-6 bg-gradient-to-br from-primary-blue to-blue-900 text-white rounded-xl">
+                    <i class="fas fa-code text-4xl mb-3"></i>
+                    <div class="text-3xl mb-2">Laravel 12</div>
+                    <div class="text-blue-200">Modern Framework</div>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-approval-green to-green-700 text-white rounded-xl">
+                    <i class="fas fa-check-double text-4xl mb-3"></i>
+                    <div class="text-3xl mb-2">94 Tests</div>
+                    <div class="text-green-200">100% Passing</div>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-xl">
+                    <i class="fas fa-shield-alt text-4xl mb-3"></i>
+                    <div class="text-3xl mb-2">Enterprise</div>
+                    <div class="text-purple-200">Security Grade</div>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-xl">
+                    <i class="fas fa-mobile-alt text-4xl mb-3"></i>
+                    <div class="text-3xl mb-2">Responsive</div>
+                    <div class="text-orange-200">All Devices</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Cards -->
+    <section class="py-16 bg-light-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl text-dark-text mb-4">Documentation Guide</h3>
+                <p class="text-xl text-gray-600">Choose your path to get started with Client Approval & Sign-Off Management System</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Installation Guide Card -->
+                <a href="installation.html" class="card-hover block bg-white rounded-xl shadow-lg overflow-hidden border border-border-gray">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-download text-3xl"></i>
+                        </div>
+                        <h4 class="text-2xl mb-2">Installation Guide</h4>
+                        <p class="text-blue-100">Step-by-step setup instructions</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>System requirements</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>File upload & configuration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Web-based installer wizard</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Database setup & migration</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 flex items-center text-blue-600">
+                            Read Guide <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- User Guide Card -->
+                <a href="user-guide.html" class="card-hover block bg-white rounded-xl shadow-lg overflow-hidden border border-border-gray">
+                    <div class="bg-gradient-to-r from-approval-green to-green-600 p-6 text-white">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-user text-3xl"></i>
+                        </div>
+                        <h4 class="text-2xl mb-2">User Guide</h4>
+                        <p class="text-green-100">Learn how to use the system</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Managing clients & contacts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Creating approval requests</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Tracking approvals & status</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Profile & account management</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 flex items-center text-approval-green">
+                            Read Guide <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Admin Guide Card -->
+                <a href="admin-guide.html" class="card-hover block bg-white rounded-xl shadow-lg overflow-hidden border border-border-gray">
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-700 p-6 text-white">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-user-shield text-3xl"></i>
+                        </div>
+                        <h4 class="text-2xl mb-2">Admin Guide</h4>
+                        <p class="text-purple-100">System configuration & management</p>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>User & role management</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Email template configuration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Security & permissions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span>Audit logs & monitoring</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 flex items-center text-purple-600">
+                            Read Guide <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl text-dark-text mb-4">Key Features</h3>
+                <p class="text-xl text-gray-600">Everything you need for approval management</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-light-bg p-6 rounded-xl border border-border-gray hover:shadow-lg transition">
+                    <div class="w-14 h-14 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl text-dark-text mb-2">Client Management</h4>
+                    <p class="text-gray-600">Manage client profiles, contact information, and relationships efficiently.</p>
+                </div>
+
+                <div class="bg-light-bg p-6 rounded-xl border border-border-gray hover:shadow-lg transition">
+                    <div class="w-14 h-14 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-check-circle text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl text-dark-text mb-2">Approval Workflow</h4>
+                    <p class="text-gray-600">Streamline approval processes with status tracking and notifications.</p>
+                </div>
+
+                <div class="bg-light-bg p-6 rounded-xl border border-border-gray hover:shadow-lg transition">
+                    <div class="w-14 h-14 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-user-shield text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl text-dark-text mb-2">Role-Based Access</h4>
+                    <p class="text-gray-600">Granular permissions with Admin, Manager, and User roles.</p>
+                </div>
+
+                <div class="bg-light-bg p-6 rounded-xl border border-border-gray hover:shadow-lg transition">
+                    <div class="w-14 h-14 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-envelope text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl text-dark-text mb-2">Email Templates</h4>
+                    <p class="text-gray-600">Customizable email templates with variable replacement.</p>
+                </div>
+
+                <div class="bg-light-bg p-6 rounded-xl border border-border-gray hover:shadow-lg transition">
+                    <div class="w-14 h-14 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-history text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl text-dark-text mb-2">Audit Logging</h4>
+                    <p class="text-gray-600">Complete activity tracking for compliance and security.</p>
+                </div>
+
+                <div class="bg-light-bg p-6 rounded-xl border border-border-gray hover:shadow-lg transition">
+                    <div class="w-14 h-14 feature-icon rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl text-dark-text mb-2">Enterprise Security</h4>
+                    <p class="text-gray-600">CSRF protection, XSS prevention, and secure authentication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specs -->
+    <section class="py-16 bg-light-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl text-dark-text mb-4">Technical Specifications</h3>
+                <p class="text-xl text-gray-600">Built with modern technologies</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-border-gray">
+                    <h4 class="text-2xl text-primary-blue mb-6 flex items-center">
+                        <i class="fas fa-server mr-3"></i>Backend
+                    </h4>
+                    <div class="space-y-0">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-700">Framework</span>
+                            <span class="text-primary-blue">Laravel 12.49.0</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-700">PHP Version</span>
+                            <span class="text-primary-blue">8.2+</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-700">Database</span>
+                            <span class="text-primary-blue">MySQL 8.0+</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <span class="text-gray-700">Authentication</span>
+                            <span class="text-primary-blue">Laravel Breeze</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-border-gray">
+                    <h4 class="text-2xl text-approval-green mb-6 flex items-center">
+                        <i class="fas fa-palette mr-3"></i>Frontend
+                    </h4>
+                    <div class="space-y-0">
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-700">CSS Framework</span>
+                            <span class="text-approval-green">Tailwind CSS 4.1</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-700">JavaScript</span>
+                            <span class="text-approval-green">Alpine.js 3.15</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-700">Build Tool</span>
+                            <span class="text-approval-green">Vite</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3">
+                            <span class="text-gray-700">Icons</span>
+                            <span class="text-approval-green">Font Awesome 6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl text-dark-text mb-4">Quick Links</h3>
+                <p class="text-xl text-gray-600">Navigate to frequently accessed sections</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="installation.html#requirements" class="p-6 bg-light-bg rounded-xl border border-border-gray hover:shadow-lg transition text-center">
+                    <i class="fas fa-list-check text-4xl text-primary-blue mb-3"></i>
+                    <h5 class="text-dark-text">Requirements</h5>
+                </a>
+                <a href="user-guide.html#clients" class="p-6 bg-light-bg rounded-xl border border-border-gray hover:shadow-lg transition text-center">
+                    <i class="fas fa-users text-4xl text-approval-green mb-3"></i>
+                    <h5 class="text-dark-text">Client Management</h5>
+                </a>
+                <a href="admin-guide.html#roles" class="p-6 bg-light-bg rounded-xl border border-border-gray hover:shadow-lg transition text-center">
+                    <i class="fas fa-user-tag text-4xl text-purple-600 mb-3"></i>
+                    <h5 class="text-dark-text">Roles & Permissions</h5>
+                </a>
+                <a href="admin-guide.html#security" class="p-6 bg-light-bg rounded-xl border border-border-gray hover:shadow-lg transition text-center">
+                    <i class="fas fa-shield-alt text-4xl text-orange-500 mb-3"></i>
+                    <h5 class="text-dark-text">Security</h5>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-blue text-white py-6">
+        <div class="text-center text-blue-200">
+            <p>&copy; 2026 Client Approval & Sign-Off Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

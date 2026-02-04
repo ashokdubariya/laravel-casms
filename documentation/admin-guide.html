@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Guide - Client Approval & Sign-Off Management System</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap&subset=latin" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1a425f',
+                        'approval-green': '#85c34e',
+                        'dark-text': '#0F172A',
+                        'light-bg': '#F8FAFC',
+                        'border-gray': '#CBD5E1',
+                    },
+                    fontFamily: {
+                        sans: ['SN Pro', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover { background-color: #f3f4f6; }
+        .sidebar-link.active { background-color: #1a425f; color: white; }
+        .gradient-header { background: linear-gradient(135deg, #1a425f 0%, #0f2d43 100%); }
+        .permission-badge { font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 9999px; }
+    </style>
+</head>
+<body class="bg-light-bg">
+    <!-- Header Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="images/casms-logo.png" alt="Logo" class="h-12">
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="installation.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-download mr-2"></i>Installation Guide
+                    </a>
+                    <a href="user-guide.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-user mr-2"></i>User Guide
+                    </a>
+                    <a href="admin-guide.html" class="text-primary-blue border-b-2 border-approval-green pb-1">
+                        <i class="fas fa-user-shield mr-2"></i>Admin Guide
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-3">
+            <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-home mr-2"></i>Home</a>
+            <a href="installation.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-download mr-2"></i>Installation</a>
+            <a href="user-guide.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-user mr-2"></i>User Guide</a>
+            <a href="admin-guide.html" class="block px-4 py-2 text-primary-blue bg-blue-50 rounded"><i class="fas fa-user-shield mr-2"></i>Admin Guide</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="gradient-header text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl mb-3 flex items-center">
+                <i class="fas fa-user-shield mr-4"></i>Administrator Guide
+            </h1>
+            <p class="text-xl text-blue-200">Complete guide to system administration, user management, and configuration</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-12 gap-8">
+            <!-- Sidebar -->
+            <aside class="col-span-12 md:col-span-3">
+                <div class="bg-white rounded-lg shadow-md p-4 sticky top-24">
+                    <nav class="space-y-1">
+                        <a href="#overview" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-book-open w-5 mr-2"></i>Overview
+                        </a>
+                        <a href="#users" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-users w-5 mr-2"></i>User Management
+                        </a>
+                        <a href="#roles" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-shield-alt w-5 mr-2"></i>Roles & Permissions
+                        </a>
+                        <a href="#email-templates" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-envelope w-5 mr-2"></i>Email Templates
+                        </a>
+                        <a href="#email-config" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-cog w-5 mr-2"></i>Email Configuration
+                        </a>
+                        <a href="#audit" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-history w-5 mr-2"></i>Audit Logs
+                        </a>
+                        <a href="#security" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-lock w-5 mr-2"></i>Security Settings
+                        </a>
+                        <a href="#maintenance" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-tools w-5 mr-2"></i>Maintenance
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="col-span-12 md:col-span-9">
+                <!-- Overview -->
+                <section id="overview" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-book-open text-primary-blue mr-3"></i>
+                        Administrator Overview
+                    </h2>
+
+                    <div class="bg-blue-50 border-l-4 border-primary-blue p-6 rounded-lg mb-6">
+                        <p class="text-gray-700 mb-3">As a system administrator, you have full control over Client Approval & Sign-Off Management System. This guide covers:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span><strong>User Management:</strong> Create, edit, and manage user accounts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span><strong>Roles & Permissions:</strong> Configure access control and permissions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span><strong>Email Management:</strong> Customize templates and configure SMTP</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span><strong>Audit Logs:</strong> Monitor system activity and user actions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                <span><strong>System Security:</strong> Manage security settings and policies</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 text-lg mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-1">Important Notice</h4>
+                                <p class="text-gray-700 text-sm">Only users with the <span class="permission-badge bg-red-500 text-white">Administrator</span> role have access to these features. Use administrative privileges responsibly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- User Management -->
+                <section id="users" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-users text-primary-blue mr-3"></i>
+                        User Management
+                    </h2>
+
+                    <!-- Create User -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-user-plus text-approval-green mr-2"></i>
+                            Creating a New User
+                        </h3>
+
+                        <div class="bg-green-50 border-l-4 border-approval-green p-6 rounded mb-4">
+                            <ol class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="bg-approval-green text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">1</span>
+                                    <span>Navigate to <strong>"Users"</strong> in the admin sidebar</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-approval-green text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">2</span>
+                                    <span>Click <strong>"Add User"</strong> button</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-approval-green text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">3</span>
+                                    <span>Fill in user information</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-approval-green text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">4</span>
+                                    <span>Assign a role (Administrator, Manager, or User)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-approval-green text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">5</span>
+                                    <span>Click <strong>"Create User"</strong></span>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded">
+                            <p class="text-sm text-gray-700">
+                                <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                                <strong>Auto-generated Password:</strong> The system can auto-generate a secure password. The user will receive a welcome email with login credentials.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Edit/Manage Users -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-user-edit text-primary-blue mr-2"></i>
+                            Managing Existing Users
+                        </h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div class="border border-blue-200 bg-blue-50 rounded-lg p-4">
+                                <i class="fas fa-edit text-blue-600 text-2xl mb-2"></i>
+                                <h5 class="text-dark-text mb-1">Edit User</h5>
+                                <p class="text-sm text-gray-700">Update name, email, or role</p>
+                            </div>
+                            <div class="border border-red-200 bg-red-50 rounded-lg p-4">
+                                <i class="fas fa-ban text-red-600 text-2xl mb-2"></i>
+                                <h5 class="text-dark-text mb-1">Deactivate</h5>
+                                <p class="text-sm text-gray-700">Suspend user access temporarily</p>
+                            </div>
+                            <div class="border border-approval-green bg-green-50 rounded-lg p-4 border-opacity-30">
+                                <i class="fas fa-key text-approval-green text-2xl mb-2"></i>
+                                <h5 class="text-dark-text mb-1">Reset Password</h5>
+                                <p class="text-sm text-gray-700">Send password reset email</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                            <div class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-lg mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="text-gray-800 mb-1">Warning: Deleting Users</h4>
+                                    <p class="text-gray-700 text-sm">Deleting a user will permanently remove their account and all associated data. Consider deactivating instead to preserve records.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Roles & Permissions -->
+                <section id="roles" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-shield-alt text-primary-blue mr-3"></i>
+                        Roles & Permissions
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Client Approval & Sign-Off Management System uses role-based access control (RBAC) to manage permissions. Each role has specific capabilities:</p>
+
+                    <!-- Default Roles -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4">Default Roles</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Administrator -->
+                            <div class="border-l-4 border-red-500 bg-red-50 rounded-lg p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="permission-badge bg-red-500 text-white mr-3">Administrator</span>
+                                    <span class="text-sm text-gray-600">Full system access</span>
+                                </div>
+                                <h4 class="text-dark-text mb-3">Permissions:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        User management (create, edit, delete)
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Role and permission management
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Email template management
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        System configuration
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Audit log access
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        All client and approval operations
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Manager -->
+                            <div class="border-l-4 border-blue-500 bg-blue-50 rounded-lg p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="permission-badge bg-blue-500 text-white mr-3">Manager</span>
+                                    <span class="text-sm text-gray-600">Manage clients and approvals</span>
+                                </div>
+                                <h4 class="text-dark-text mb-3">Permissions:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Full client management
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Create/edit approval requests
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Approve/reject requests
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        View audit logs (limited)
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-times text-red-500 mr-2"></i>
+                                        <span class="text-gray-500">No user management</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-times text-red-500 mr-2"></i>
+                                        <span class="text-gray-500">No system configuration</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User -->
+                            <div class="border-l-4 border-approval-green rounded-lg p-6 bg-green-50">
+                                <div class="flex items-center mb-3">
+                                    <span class="permission-badge bg-approval-green text-white mr-3">User</span>
+                                    <span class="text-sm text-gray-600">Basic operations</span>
+                                </div>
+                                <h4 class="text-dark-text mb-3">Permissions:</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        View clients
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Create approval requests
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        View own approvals
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-check text-approval-green mr-2"></i>
+                                        Update profile
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-times text-red-500 mr-2"></i>
+                                        <span class="text-gray-500">Cannot edit clients</span>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-700">
+                                        <i class="fas fa-times text-red-500 mr-2"></i>
+                                        <span class="text-gray-500">Cannot approve requests</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Permission List -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4">All System Permissions</h3>
+                        
+                        <div class="bg-light-bg p-6 rounded-lg border border-border-gray">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-blue-500 rounded-full mr-2"></span>
+                                    view-users
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-blue-500 rounded-full mr-2"></span>
+                                    create-users
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-blue-500 rounded-full mr-2"></span>
+                                    edit-users
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-blue-500 rounded-full mr-2"></span>
+                                    delete-users
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-approval-green rounded-full mr-2"></span>
+                                    view-clients
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-approval-green rounded-full mr-2"></span>
+                                    create-clients
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-approval-green rounded-full mr-2"></span>
+                                    edit-clients
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-approval-green rounded-full mr-2"></span>
+                                    delete-clients
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                                    view-approvals
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                                    create-approvals
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                                    edit-approvals
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                                    delete-approvals
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                                    approve-requests
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                                    reject-requests
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+                                    view-roles
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+                                    create-roles
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+                                    edit-roles
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+                                    delete-roles
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-orange-500 rounded-full mr-2"></span>
+                                    view-email-templates
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-orange-500 rounded-full mr-2"></span>
+                                    edit-email-templates
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-red-500 rounded-full mr-2"></span>
+                                    view-audit-logs
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-red-500 rounded-full mr-2"></span>
+                                    export-data
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-gray-500 rounded-full mr-2"></span>
+                                    manage-settings
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700">
+                                    <span class="w-4 h-4 bg-gray-500 rounded-full mr-2"></span>
+                                    system-maintenance
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Email Templates -->
+                <section id="email-templates" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-envelope text-primary-blue mr-3"></i>
+                        Email Template Management
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Customize email notifications sent by the system. Client Approval & Sign-Off Management System includes 5 default templates:</p>
+
+                    <!-- Template List -->
+                    <div class="space-y-4 mb-8">
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-dark-text flex items-center">
+                                    <i class="fas fa-user-plus text-blue-500 mr-2"></i>
+                                    Welcome Email
+                                </h4>
+                                <span class="permission-badge bg-blue-100 text-blue-800">User Registration</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Sent to new users when their account is created</p>
+                            <div class="bg-light-bg p-3 rounded text-sm">
+                                <strong>Available Variables:</strong> {name}, {email}, {password}, {app_url}
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-dark-text flex items-center">
+                                    <i class="fas fa-key text-yellow-500 mr-2"></i>
+                                    Password Reset
+                                </h4>
+                                <span class="permission-badge bg-yellow-100 text-yellow-800">Password Recovery</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Sent when a user requests a password reset</p>
+                            <div class="bg-light-bg p-3 rounded text-sm">
+                                <strong>Available Variables:</strong> {name}, {reset_url}, {expires_in}
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-dark-text flex items-center">
+                                    <i class="fas fa-check-circle text-approval-green mr-2"></i>
+                                    Approval Granted
+                                </h4>
+                                <span class="permission-badge bg-green-100 text-green-800">Approval Success</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Sent to client when their request is approved</p>
+                            <div class="bg-light-bg p-3 rounded text-sm">
+                                <strong>Available Variables:</strong> {client_name}, {approval_title}, {approval_message}, {approved_by}, {app_url}
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-dark-text flex items-center">
+                                    <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                    Approval Rejected
+                                </h4>
+                                <span class="permission-badge bg-red-100 text-red-800">Approval Denied</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Sent to client when their request is rejected</p>
+                            <div class="bg-light-bg p-3 rounded text-sm">
+                                <strong>Available Variables:</strong> {client_name}, {approval_title}, {rejection_reason}, {rejected_by}, {app_url}
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="text-dark-text flex items-center">
+                                    <i class="fas fa-bell text-orange-500 mr-2"></i>
+                                    New Approval Request
+                                </h4>
+                                <span class="permission-badge bg-orange-100 text-orange-800">Notification</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Sent to administrators when a new approval is created</p>
+                            <div class="bg-light-bg p-3 rounded text-sm">
+                                <strong>Available Variables:</strong> {client_name}, {approval_title}, {priority}, {due_date}, {view_url}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Editing Templates -->
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
+                        <h3 class="text-dark-text mb-3">Editing Email Templates</h3>
+                        <ol class="space-y-2 text-sm text-gray-700">
+                            <li>1. Click "Email Templates" in the admin menu</li>
+                            <li>2. Select the template to edit</li>
+                            <li>3. Modify the subject and body (HTML supported)</li>
+                            <li>4. Use variables in {curly_braces} format</li>
+                            <li>5. Click "Save Template"</li>
+                            <li>6. Send a test email to verify changes</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Email Configuration -->
+                <section id="email-config" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-cog text-primary-blue mr-3"></i>
+                        Email Configuration (SMTP)
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Configure SMTP settings to enable email notifications. Edit your <code class="bg-gray-100 px-2 py-1 rounded">.env</code> file:</p>
+
+                    <div class="bg-dark-text rounded-lg p-6 mb-6">
+                        <pre class="text-approval-green text-sm overflow-x-auto"><code>MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+MAIL_FROM_NAME="${APP_NAME}"</code></pre>
+                    </div>
+
+                    <h3 class="text-xl text-dark-text mb-4">Popular SMTP Providers</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <h4 class="text-dark-text mb-2">
+                                <i class="fas fa-envelope text-blue-500 mr-2"></i>Gmail
+                            </h4>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <p><strong>Host:</strong> smtp.gmail.com</p>
+                                <p><strong>Port:</strong> 587 (TLS) or 465 (SSL)</p>
+                                <p><strong>Note:</strong> Use App Password, not your Gmail password</p>
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <h4 class="text-dark-text mb-2">
+                                <i class="fas fa-envelope text-orange-500 mr-2"></i>SendGrid
+                            </h4>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <p><strong>Host:</strong> smtp.sendgrid.net</p>
+                                <p><strong>Port:</strong> 587</p>
+                                <p><strong>Username:</strong> apikey</p>
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <h4 class="text-dark-text mb-2">
+                                <i class="fas fa-envelope text-purple-500 mr-2"></i>Mailgun
+                            </h4>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <p><strong>Host:</strong> smtp.mailgun.org</p>
+                                <p><strong>Port:</strong> 587</p>
+                                <p><strong>Note:</strong> Requires domain verification</p>
+                            </div>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-4">
+                            <h4 class="text-dark-text mb-2">
+                                <i class="fas fa-envelope text-approval-green mr-2"></i>Mailtrap (Testing)
+                            </h4>
+                            <div class="text-sm text-gray-700 space-y-1">
+                                <p><strong>Host:</strong> smtp.mailtrap.io</p>
+                                <p><strong>Port:</strong> 2525</p>
+                                <p><strong>Note:</strong> For development/testing only</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 text-lg mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-1">After Configuration</h4>
+                                <p class="text-gray-700 text-sm">Run <code class="bg-white px-2 py-1 rounded">php artisan config:cache</code> to apply changes. Test email functionality from Email Templates page.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Audit Logs -->
+                <section id="audit" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-history text-primary-blue mr-3"></i>
+                        Audit Logs
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Monitor all system activity with comprehensive audit logging. Track user actions, changes, and important events.</p>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4">What's Logged?</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="text-dark-text mb-2 flex items-center">
+                                    <i class="fas fa-user text-blue-500 mr-2"></i>
+                                    User Events
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>Login/logout activity</li>
+                                    <li>User creation and deletion</li>
+                                    <li>Role changes</li>
+                                    <li>Password resets</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="text-dark-text mb-2 flex items-center">
+                                    <i class="fas fa-users text-approval-green mr-2"></i>
+                                    Client Events
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>Client created/updated/deleted</li>
+                                    <li>Status changes</li>
+                                    <li>Bulk operations</li>
+                                    <li>Data exports</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <h4 class="text-dark-text mb-2 flex items-center">
+                                    <i class="fas fa-check-circle text-yellow-600 mr-2"></i>
+                                    Approval Events
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>Request created/edited/deleted</li>
+                                    <li>Approval granted/rejected</li>
+                                    <li>Status changes</li>
+                                    <li>Attachments added/removed</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="text-dark-text mb-2 flex items-center">
+                                    <i class="fas fa-cog text-purple-600 mr-2"></i>
+                                    System Events
+                                </h4>
+                                <ul class="text-sm text-gray-700 space-y-1">
+                                    <li>Configuration changes</li>
+                                    <li>Email template updates</li>
+                                    <li>Role/permission modifications</li>
+                                    <li>Failed login attempts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Security -->
+                <section id="security" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-lock text-primary-blue mr-3"></i>
+                        Security Settings
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded">
+                            <h3 class="text-dark-text mb-3 flex items-center">
+                                <i class="fas fa-shield-alt text-red-500 mr-2"></i>
+                                Security Best Practices
+                            </h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Strong Passwords:</strong> Enforce minimum 8 characters with mixed case, numbers, and symbols</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Regular Audits:</strong> Review audit logs weekly for suspicious activity</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Role-Based Access:</strong> Assign minimum necessary permissions to each role</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>HTTPS Only:</strong> Ensure APP_URL uses https:// in production</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Regular Updates:</strong> Keep Laravel and dependencies up-to-date</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border border-primary-blue rounded-lg p-6 bg-blue-50">
+                                <h4 class="text-dark-text mb-3 flex items-center">
+                                    <i class="fas fa-key text-primary-blue mr-2"></i>
+                                    Password Policies
+                                </h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li>Minimum 8 characters required</li>
+                                    <li>Password reset expires in 60 minutes</li>
+                                    <li>Failed login attempts logged</li>
+                                    <li>Passwords hashed with bcrypt</li>
+                                </ul>
+                            </div>
+
+                            <div class="border border-approval-green rounded-lg p-6 bg-green-50">
+                                <h4 class="text-dark-text mb-3 flex items-center">
+                                    <i class="fas fa-database text-approval-green mr-2"></i>
+                                    Data Protection
+                                </h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li>All data encrypted at rest</li>
+                                    <li>HTTPS enforced for transmission</li>
+                                    <li>CSRF protection enabled</li>
+                                    <li>XSS protection active</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Maintenance -->
+                <section id="maintenance" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-tools text-primary-blue mr-3"></i>
+                        System Maintenance
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                            <h3 class="text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-broom text-blue-500 mr-2"></i>
+                                Cache Management
+                            </h3>
+                            <p class="text-gray-700 mb-3">Clear application cache to apply configuration changes:</p>
+                            <div class="bg-dark-text rounded p-4 mb-3">
+                                <code class="text-approval-green text-sm">php artisan cache:clear<br>php artisan config:cache<br>php artisan route:cache<br>php artisan view:clear</code>
+                            </div>
+                            <p class="text-sm text-gray-600">Run these commands after updating .env or configuration files.</p>
+                        </div>
+
+                        <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                            <h3 class="text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-database text-yellow-600 mr-2"></i>
+                                Database Backup
+                            </h3>
+                            <p class="text-gray-700 mb-3">Regular backups are critical. Use mysqldump or your hosting panel:</p>
+                            <div class="bg-dark-text rounded p-4 mb-3">
+                                <code class="text-approval-green text-sm">mysqldump -u username -p database_name > backup_$(date +%Y%m%d).sql</code>
+                            </div>
+                            <div class="flex items-start bg-yellow-100 p-3 rounded">
+                                <i class="fas fa-clock text-yellow-600 mt-1 mr-2"></i>
+                                <p class="text-sm text-gray-700"><strong>Recommendation:</strong> Schedule daily automated backups and store off-site.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                            <h3 class="text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-sync text-approval-green mr-2"></i>
+                                Updates & Upgrades
+                            </h3>
+                            <p class="text-gray-700 mb-3">Keep your system secure and up-to-date:</p>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-approval-green mt-1 mr-2"></i>
+                                    <span>Review CHANGELOG.md for new features and fixes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-approval-green mt-1 mr-2"></i>
+                                    <span>Test updates on staging environment first</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-approval-green mt-1 mr-2"></i>
+                                    <span>Backup database before major updates</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-approval-green mt-1 mr-2"></i>
+                                    <span>Run <code class="bg-white px-2 py-1 rounded">composer update</code> for dependencies</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                            <h3 class="text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-chart-line text-purple-600 mr-2"></i>
+                                Performance Monitoring
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="bg-white p-3 rounded">
+                                    <i class="fas fa-tachometer-alt text-purple-600 text-lg mb-2"></i>
+                                    <h5 class="text-sm">Response Time</h5>
+                                    <p class="text-xs text-gray-600">Monitor page load speeds</p>
+                                </div>
+                                <div class="bg-white p-3 rounded">
+                                    <i class="fas fa-hdd text-purple-600 text-lg mb-2"></i>
+                                    <h5 class="text-sm">Disk Space</h5>
+                                    <p class="text-xs text-gray-600">Check storage/logs regularly</p>
+                                </div>
+                                <div class="bg-white p-3 rounded">
+                                    <i class="fas fa-server text-purple-600 text-lg mb-2"></i>
+                                    <h5 class="text-sm">Server Health</h5>
+                                    <p class="text-xs text-gray-600">Monitor CPU and memory usage</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Help -->
+                <section class="bg-gradient-to-r from-primary-blue to-blue-900 text-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl mb-6 flex items-center">
+                        <i class="fas fa-life-ring mr-3"></i>
+                        Need Additional Help?
+                    </h2>
+                    <p class="text-blue-100 mb-6">Explore more documentation to get the most out of Client Approval & Sign-Off Management System:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <a href="user-guide.html" class="block bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-6 transition">
+                            <h3 class="text-xl mb-2 flex items-center">
+                                <i class="fas fa-user mr-3"></i>User Guide
+                            </h3>
+                            <p class="text-blue-100 text-sm">Learn how to use Client Approval & Sign-Off Management System as an end user</p>
+                        </a>
+                        <a href="installation.html" class="block bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-6 transition">
+                            <h3 class="text-xl mb-2 flex items-center">
+                                <i class="fas fa-download mr-3"></i>Installation Guide
+                            </h3>
+                            <p class="text-blue-100 text-sm">Complete installation and setup instructions</p>
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary-blue text-white py-6">
+        <div class="text-center text-blue-200">
+            <p>&copy; 2026 Client Approval & Sign-Off Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        const links = document.querySelectorAll('.sidebar-link');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                links.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

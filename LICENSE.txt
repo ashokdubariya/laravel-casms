@@ -1,0 +1,66 @@
+Regular License
+
+Copyright (c) 2026 Client Approval & Sign-Off Management System
+
+Permission is hereby granted to any person or organization purchasing this software ("the Purchaser") to use, copy, and modify the Software for the creation of one (1) End Product for themselves or for one (1) client (a "single application"), subject to the following conditions:
+
+## Permitted Use
+
+The Purchaser may:
+- Use the Software to create one End Product for personal use or for one client
+- Modify the source code to suit their specific needs
+- Use the Software in a single installation/deployment for the Purchaser or one client
+- Create derivative works for their own use or their client's use
+
+## Restrictions
+
+The Purchaser may NOT:
+- Resell, redistribute, or transfer the Software source code to any third party
+- Use the Software to create multiple End Products
+- Use the Software to create a product that is redistributed or resold to multiple customers
+- Allow the source code to be extracted by end users
+- Create a SaaS (Software as a Service) product for resale without an Extended License
+- Share, sublicense, or transfer the license to another party
+
+## Multi-User / SaaS Deployment
+
+For the following use cases, you must purchase an Extended License:
+- Creating a SaaS product where multiple organizations/users can register
+- Deploying the software for multiple clients from a single installation
+- Offering the software as a service to end users
+- Any use where end users can create accounts (multi-tenant as a service)
+
+## Single End Product Definition
+
+A "Single End Product" means:
+- One installation for your own business operations
+- One installation for a single paying client
+- One customized version delivered to one client
+
+Examples of PERMITTED use:
+- Installing for your agency to track your own clients
+- Building a custom version for Client A
+- Using as an internal tool for one organization
+
+Examples of NOT PERMITTED use (require Extended License):
+- Installing for 5 different clients from one codebase
+- Running as a SaaS where users can sign up
+- Offering as a white-label solution to multiple buyers
+
+## Updates and Support
+
+- Updates are provided for the version purchased
+- No guaranteed support period
+- Bug fixes and security updates provided on a best-effort basis
+
+## Disclaimer of Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Third-Party Components
+
+This software includes third-party open-source libraries. Each library retains its original license. See composer.json for the complete list of dependencies.
+
+---
+
+For Extended License inquiries or questions about permitted use, please contact us before purchase.

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide - Client Approval & Sign-Off Management System</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap&subset=latin" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1a425f',
+                        'approval-green': '#85c34e',
+                        'dark-text': '#0F172A',
+                        'light-bg': '#F8FAFC',
+                        'border-gray': '#CBD5E1',
+                    },
+                    fontFamily: {
+                        sans: ['SN Pro', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover { background-color: #f3f4f6; }
+        .sidebar-link.active { background-color: #1a425f; color: white; }
+        .gradient-header { background: linear-gradient(135deg, #1a425f 0%, #0f2d43 100%); }
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+            border: 2px dashed #9ca3af;
+        }
+    </style>
+</head>
+<body class="bg-light-bg">
+    <!-- Header Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="images/casms-logo.png" alt="Logo" class="h-12">
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="installation.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-download mr-2"></i>Installation Guide
+                    </a>
+                    <a href="user-guide.html" class="text-primary-blue border-b-2 border-approval-green pb-1">
+                        <i class="fas fa-user mr-2"></i>User Guide
+                    </a>
+                    <a href="admin-guide.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-user-shield mr-2"></i>Admin Guide
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-3">
+            <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-home mr-2"></i>Home</a>
+            <a href="installation.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-download mr-2"></i>Installation</a>
+            <a href="user-guide.html" class="block px-4 py-2 text-primary-blue bg-green-50 rounded"><i class="fas fa-user mr-2"></i>User Guide</a>
+            <a href="admin-guide.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-user-shield mr-2"></i>Admin Guide</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="gradient-header text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl mb-3 flex items-center">
+                <i class="fas fa-user mr-4"></i>User Guide
+            </h1>
+            <p class="text-xl text-green-100">Learn how to use Client Approval & Sign-Off Management System effectively to manage clients and approvals</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-12 gap-8">
+            <!-- Sidebar -->
+            <aside class="col-span-12 md:col-span-3">
+                <div class="bg-white rounded-lg shadow-md p-4 sticky top-24">
+                    <nav class="space-y-1">
+                        <a href="#getting-started" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-rocket w-5 mr-2"></i>Getting Started
+                        </a>
+                        <a href="#dashboard" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-tachometer-alt w-5 mr-2"></i>Dashboard
+                        </a>
+                        <a href="#clients" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-users w-5 mr-2"></i>Managing Clients
+                        </a>
+                        <a href="#approvals" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-check-circle w-5 mr-2"></i>Approval Requests
+                        </a>
+                        <a href="#actions" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-tasks w-5 mr-2"></i>Approval Actions
+                        </a>
+                        <a href="#profile" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-user-cog w-5 mr-2"></i>Profile Settings
+                        </a>
+                        <a href="#tips" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-lightbulb w-5 mr-2"></i>Tips & Best Practices
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="col-span-12 md:col-span-9">
+                <!-- Getting Started -->
+                <section id="getting-started" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-rocket text-approval-green mr-3"></i>
+                        Getting Started
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl text-dark-text mb-3">Logging In</h3>
+                            <p class="text-gray-700 mb-4">Access Client Approval & Sign-Off Management System by navigating to your application URL and entering your credentials:</p>
+                            
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded mb-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-700 mb-2">
+                                            <i class="fas fa-envelope text-blue-500 mr-2"></i>Email Address
+                                        </label>
+                                        <div class="bg-white px-4 py-2 rounded border">your-email@company.com</div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-700 mb-2">
+                                            <i class="fas fa-lock text-blue-500 mr-2"></i>Password
+                                        </label>
+                                        <div class="bg-white px-4 py-2 rounded border">••••••••</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                                <div class="flex items-start">
+                                    <i class="fas fa-key text-yellow-500 text-lg mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-gray-800 mb-1">Forgot Password?</h4>
+                                        <p class="text-gray-700 text-sm">Click "Forgot your password?" on the login page. You'll receive a password reset link via email.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl text-dark-text mb-3">First Login</h3>
+                            <p class="text-gray-700 mb-3">After logging in for the first time, you'll see:</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Dashboard:</strong> Overview of system statistics and recent activity</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Navigation Sidebar:</strong> Access to all modules based on your role</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>User Menu:</strong> Profile settings and logout option (top-right)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dashboard -->
+                <section id="dashboard" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-tachometer-alt text-approval-green mr-3"></i>
+                        Dashboard Overview
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">The dashboard provides a quick overview of your approval management system:</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl">
+                            <i class="fas fa-users text-3xl mb-3"></i>
+                            <h3 class="text-2xl mb-1">Clients</h3>
+                            <p class="text-blue-100 text-sm">Total client count</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-approval-green to-green-600 text-white p-6 rounded-xl">
+                            <i class="fas fa-check-circle text-3xl mb-3"></i>
+                            <h3 class="text-2xl mb-1">Approvals</h3>
+                            <p class="text-green-100 text-sm">Total approval requests</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-xl">
+                            <i class="fas fa-clock text-3xl mb-3"></i>
+                            <h3 class="text-2xl mb-1">Pending</h3>
+                            <p class="text-yellow-100 text-sm">Awaiting decision</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-light-bg p-6 rounded-lg border border-border-gray">
+                        <h3 class="text-xl text-dark-text mb-4">Dashboard Sections:</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <i class="fas fa-chart-bar text-primary-blue w-6 mr-3 mt-1"></i>
+                                <div>
+                                    <h4>Statistics Cards</h4>
+                                    <p class="text-sm text-gray-600">Quick metrics showing total clients, approvals, and pending requests</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-list text-approval-green w-6 mr-3 mt-1"></i>
+                                <div>
+                                    <h4>Recent Activity</h4>
+                                    <p class="text-sm text-gray-600">Latest approval requests and status changes</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-calendar-day text-orange-500 w-6 mr-3 mt-1"></i>
+                                <div>
+                                    <h4>Upcoming Deadlines</h4>
+                                    <p class="text-sm text-gray-600">Approvals nearing their due date</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-500 w-6 mr-3 mt-1"></i>
+                                <div>
+                                    <h4>Priority Requests</h4>
+                                    <p class="text-sm text-gray-600">High and urgent priority approvals requiring attention</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Clients Section -->
+                <section id="clients" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-users text-approval-green mr-3"></i>
+                        Managing Clients
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Clients are the core of your approval management. Here's how to manage them:</p>
+
+                    <!-- Add Client -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-plus-circle text-primary-blue mr-2"></i>
+                            Adding a New Client
+                        </h3>
+                        
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded mb-4">
+                            <ol class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">1</span>
+                                    <span>Click <strong>"Clients"</strong> in the sidebar navigation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">2</span>
+                                    <span>Click the <strong>"Add Client"</strong> button (top-right)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">3</span>
+                                    <span>Fill in the client information form</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">4</span>
+                                    <span>Click <strong>"Create Client"</strong> to save</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- View/Edit Client -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-edit text-approval-green mr-2"></i>
+                            Viewing & Editing Clients
+                        </h3>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-4">
+                            <h4 class="text-dark-text mb-3">Client List Features:</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-search text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Search:</strong> Find clients by name, email, or company</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-filter text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Filter:</strong> View active or inactive clients only</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-sort text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Sort:</strong> Click column headers to sort (name, email, date)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-list text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Pagination:</strong> Navigate through pages if you have many clients</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <h4 class="text-dark-text mb-3">Client Actions:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="border border-blue-200 bg-blue-50 rounded-lg p-4">
+                                <i class="fas fa-eye text-blue-600 text-2xl mb-2"></i>
+                                <h5 class="text-dark-text mb-1">View Details</h5>
+                                <p class="text-sm text-gray-700">Click client name or eye icon to see full details</p>
+                            </div>
+                            <div class="border border-approval-green bg-green-50 rounded-lg p-4 border-opacity-30">
+                                <i class="fas fa-edit text-approval-green text-2xl mb-2"></i>
+                                <h5 class="text-dark-text mb-1">Edit Client</h5>
+                                <p class="text-sm text-gray-700">Click pencil icon to modify client information</p>
+                            </div>
+                            <div class="border border-red-200 bg-red-50 rounded-lg p-4">
+                                <i class="fas fa-trash text-red-600 text-2xl mb-2"></i>
+                                <h5 class="text-dark-text mb-1">Delete Client</h5>
+                                <p class="text-sm text-gray-700">Click trash icon (requires confirmation)</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded mt-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-lg mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="text-gray-800 mb-1">Warning: Deleting Clients</h4>
+                                    <p class="text-gray-700 text-sm">Deleting a client cannot be undone. All associated approval requests will also be affected. Consider setting the status to "Inactive" instead.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toggle Status -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-toggle-on text-primary-blue mr-2"></i>
+                            Managing Client Status
+                        </h3>
+                        
+                        <p class="text-gray-700 mb-4">Instead of deleting clients, you can toggle their status:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-approval-green bg-green-50 rounded-lg p-6 border-opacity-30">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-approval-green text-white px-3 py-1 rounded-full text-sm">Active</span>
+                                </div>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Client appears in lists</li>
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Can create approval requests</li>
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Receives email notifications</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-300 bg-gray-50 rounded-lg p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-gray-400 text-white px-3 py-1 rounded-full text-sm">Inactive</span>
+                                </div>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li><i class="fas fa-times text-gray-500 mr-2"></i>Hidden by default (can filter to view)</li>
+                                    <li><i class="fas fa-times text-gray-500 mr-2"></i>Cannot create new approvals</li>
+                                    <li><i class="fas fa-times text-gray-500 mr-2"></i>Data preserved for records</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Approvals Section -->
+                <section id="approvals" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-check-circle text-approval-green mr-3"></i>
+                        Managing Approval Requests
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Approval requests are the heart of Client Approval & Sign-Off Management System. Learn how to create and manage them:</p>
+
+                    <!-- Create Approval -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-plus-circle text-primary-blue mr-2"></i>
+                            Creating an Approval Request
+                        </h3>
+                        
+                        <div class="bg-primary-blue bg-opacity-10 p-6 rounded-lg border-l-4 border-primary-blue mb-4">
+                            <ol class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="bg-primary-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">1</span>
+                                    <span>Navigate to <strong>"Approvals"</strong> from the sidebar</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-primary-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">2</span>
+                                    <span>Click <strong>"Create Approval"</strong> button</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-primary-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">3</span>
+                                    <span>Fill in the approval request form</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-primary-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">4</span>
+                                    <span>Upload attachments (optional)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-primary-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-3 flex-shrink-0">5</span>
+                                    <span>Click <strong>"Create Approval Request"</strong></span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Priority Levels -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4">Understanding Priority Levels</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="border-l-4 border-blue-400 bg-blue-50 p-4 rounded">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-blue-400 text-white px-3 py-1 rounded-full text-sm">Low</span>
+                                </div>
+                                <p class="text-sm text-gray-700">Non-urgent items, flexible timeline</p>
+                            </div>
+                            <div class="border-l-4 border-yellow-400 bg-yellow-50 p-4 rounded">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-yellow-400 text-white px-3 py-1 rounded-full text-sm">Medium</span>
+                                </div>
+                                <p class="text-sm text-gray-700">Standard approvals, normal priority</p>
+                            </div>
+                            <div class="border-l-4 border-orange-400 bg-orange-50 p-4 rounded">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-orange-400 text-white px-3 py-1 rounded-full text-sm">High</span>
+                                </div>
+                                <p class="text-sm text-gray-700">Important, needs prompt attention</p>
+                            </div>
+                            <div class="border-l-4 border-red-400 bg-red-50 p-4 rounded">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-red-400 text-white px-3 py-1 rounded-full text-sm">Urgent</span>
+                                </div>
+                                <p class="text-sm text-gray-700">Critical, immediate action required</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View Approvals -->
+                    <div class="mb-8">
+                        <h3 class="text-2xl text-dark-text mb-4 flex items-center">
+                            <i class="fas fa-list text-approval-green mr-2"></i>
+                            Viewing & Filtering Approvals
+                        </h3>
+                        
+                        <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+                            <h4 class="text-dark-text mb-3">Filter by Status:</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <button class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg border border-yellow-300 flex items-center justify-center">
+                                    <i class="fas fa-clock mr-2"></i>Pending
+                                </button>
+                                <button class="px-4 py-2 bg-green-100 text-green-800 rounded-lg border border-green-300 flex items-center justify-center">
+                                    <i class="fas fa-check-circle mr-2"></i>Approved
+                                </button>
+                                <button class="px-4 py-2 bg-red-100 text-red-800 rounded-lg border border-red-300 flex items-center justify-center">
+                                    <i class="fas fa-times-circle mr-2"></i>Rejected
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-3">Click any status button to filter the approval list</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Approval Actions -->
+                <section id="actions" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-tasks text-approval-green mr-3"></i>
+                        Approval Actions
+                    </h2>
+
+                    <div class="space-y-8">
+                        <!-- Approve -->
+                        <div class="border-l-4 border-approval-green bg-green-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-check-circle text-approval-green text-2xl mr-3"></i>
+                                Approving a Request
+                            </h3>
+                            <ol class="space-y-2 text-gray-700 mb-4">
+                                <li>1. Click on the approval request to view details</li>
+                                <li>2. Review all information and attachments</li>
+                                <li>3. Click the <strong class="text-approval-green">"Approve"</strong> button</li>
+                                <li>4. Optionally add an approval message/note</li>
+                                <li>5. Confirm the approval</li>
+                            </ol>
+                            <div class="bg-green-100 p-3 rounded">
+                                <p class="text-sm"><i class="fas fa-envelope text-approval-green mr-2"></i><strong>Email Notification:</strong> The client will automatically receive an approval email (if email is configured).</p>
+                            </div>
+                        </div>
+
+                        <!-- Reject -->
+                        <div class="border-l-4 border-red-500 bg-red-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-times-circle text-red-500 text-2xl mr-3"></i>
+                                Rejecting a Request
+                            </h3>
+                            <ol class="space-y-2 text-gray-700 mb-4">
+                                <li>1. Click on the approval request to view details</li>
+                                <li>2. Click the <strong class="text-red-600">"Reject"</strong> button</li>
+                                <li>3. Add a rejection reason/message (recommended)</li>
+                                <li>4. Confirm the rejection</li>
+                            </ol>
+                            <div class="bg-red-100 p-3 rounded">
+                                <p class="text-sm"><i class="fas fa-info-circle text-red-600 mr-2"></i><strong>Best Practice:</strong> Always provide a clear reason for rejection to help clients understand what needs to be changed.</p>
+                            </div>
+                        </div>
+
+                        <!-- Edit -->
+                        <div class="border-l-4 border-blue-500 bg-blue-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-4 flex items-center">
+                                <i class="fas fa-edit text-blue-500 text-2xl mr-3"></i>
+                                Editing a Request
+                            </h3>
+                            <p class="text-gray-700 mb-3">You can edit pending approval requests:</p>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                                    <span>Update title, description, or priority</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                                    <span>Change due date</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                                    <span>Add or remove attachments</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-times text-gray-400 mt-1 mr-2"></i>
+                                    <span class="text-gray-500">Cannot edit approved/rejected requests</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section id="profile" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-user-cog text-approval-green mr-3"></i>
+                        Profile Management
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl text-dark-text mb-3">Accessing Your Profile</h3>
+                            <p class="text-gray-700 mb-3">Click your name in the top-right corner, then select <strong>"Profile"</strong>.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border border-primary-blue rounded-lg p-6 bg-blue-50">
+                                <h4 class="text-dark-text mb-3 flex items-center">
+                                    <i class="fas fa-user-edit text-primary-blue mr-2"></i>
+                                    Update Profile Information
+                                </h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li><i class="fas fa-check text-primary-blue mr-2"></i>Change your name</li>
+                                    <li><i class="fas fa-check text-primary-blue mr-2"></i>Update email address</li>
+                                    <li><i class="fas fa-check text-primary-blue mr-2"></i>Click "Update Profile" to save</li>
+                                </ul>
+                            </div>
+
+                            <div class="border border-approval-green rounded-lg p-6 bg-green-50">
+                                <h4 class="text-dark-text mb-3 flex items-center">
+                                    <i class="fas fa-key text-approval-green mr-2"></i>
+                                    Change Password
+                                </h4>
+                                <ul class="space-y-2 text-sm text-gray-700">
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Enter current password</li>
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Enter new password (min 8 chars)</li>
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Confirm new password</li>
+                                    <li><i class="fas fa-check text-approval-green mr-2"></i>Click "Update Password"</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                            <div class="flex items-start">
+                                <i class="fas fa-shield-alt text-yellow-500 text-lg mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="text-gray-800 mb-1">Security Tip</h4>
+                                    <p class="text-gray-700 text-sm">Use a strong password with a mix of letters, numbers, and symbols. Change your password regularly for better security.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tips Section -->
+                <section id="tips" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-lightbulb text-approval-green mr-3"></i>
+                        Tips & Best Practices
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
+                            <h3 class="text-dark-text mb-3 flex items-center">
+                                <i class="fas fa-users text-blue-500 mr-2"></i>
+                                Client Management
+                            </h3>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><i class="fas fa-check text-blue-500 mr-2"></i>Keep client information up-to-date</li>
+                                <li><i class="fas fa-check text-blue-500 mr-2"></i>Use unique, valid email addresses</li>
+                                <li><i class="fas fa-check text-blue-500 mr-2"></i>Set inactive instead of deleting</li>
+                                <li><i class="fas fa-check text-blue-500 mr-2"></i>Use company field for better organization</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-approval-green p-6 rounded">
+                            <h3 class="text-dark-text mb-3 flex items-center">
+                                <i class="fas fa-check-circle text-approval-green mr-2"></i>
+                                Approval Requests
+                            </h3>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><i class="fas fa-check text-approval-green mr-2"></i>Write clear, descriptive titles</li>
+                                <li><i class="fas fa-check text-approval-green mr-2"></i>Provide detailed descriptions</li>
+                                <li><i class="fas fa-check text-approval-green mr-2"></i>Set appropriate priority levels</li>
+                                <li><i class="fas fa-check text-approval-green mr-2"></i>Attach relevant files/documents</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded">
+                            <h3 class="text-dark-text mb-3 flex items-center">
+                                <i class="fas fa-calendar-check text-purple-500 mr-2"></i>
+                                Workflow Efficiency
+                            </h3>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><i class="fas fa-check text-purple-500 mr-2"></i>Review dashboard daily</li>
+                                <li><i class="fas fa-check text-purple-500 mr-2"></i>Act on pending approvals promptly</li>
+                                <li><i class="fas fa-check text-purple-500 mr-2"></i>Use filters to focus on priorities</li>
+                                <li><i class="fas fa-check text-purple-500 mr-2"></i>Set realistic due dates</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 border-l-4 border-orange-500 p-6 rounded">
+                            <h3 class="text-dark-text mb-3 flex items-center">
+                                <i class="fas fa-comments text-orange-500 mr-2"></i>
+                                Communication
+                            </h3>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li><i class="fas fa-check text-orange-500 mr-2"></i>Always add notes when approving/rejecting</li>
+                                <li><i class="fas fa-check text-orange-500 mr-2"></i>Be specific about rejection reasons</li>
+                                <li><i class="fas fa-check text-orange-500 mr-2"></i>Keep clients informed of progress</li>
+                                <li><i class="fas fa-check text-orange-500 mr-2"></i>Respond to urgent items quickly</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Next Steps -->
+                <section class="bg-gradient-to-r from-approval-green to-green-700 text-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap mr-3"></i>
+                        Need More Help?
+                    </h2>
+                    <p class="text-green-100 mb-6">Explore additional documentation for advanced features and system administration:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <a href="admin-guide.html" class="block bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-6 transition">
+                            <h3 class="text-xl mb-2 flex items-center">
+                                <i class="fas fa-user-shield mr-3"></i>Admin Guide
+                            </h3>
+                            <p class="text-green-100 text-sm">User management, roles, email templates, and system configuration</p>
+                        </a>
+                        <a href="installation.html" class="block bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-6 transition">
+                            <h3 class="text-xl mb-2 flex items-center">
+                                <i class="fas fa-download mr-3"></i>Installation Guide
+                            </h3>
+                            <p class="text-green-100 text-sm">Setup instructions and troubleshooting tips</p>
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary-blue text-white py-6">
+        <div class="text-center text-blue-200">
+            <p>&copy; 2026 Client Approval & Sign-Off Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        const links = document.querySelectorAll('.sidebar-link');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                links.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

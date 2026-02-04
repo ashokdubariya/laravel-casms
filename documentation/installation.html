@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - Client Approval & Sign-Off Management System</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap&subset=latin" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#1a425f',
+                        'approval-green': '#85c34e',
+                        'dark-text': '#0F172A',
+                        'light-bg': '#F8FAFC',
+                        'border-gray': '#CBD5E1',
+                    },
+                    fontFamily: {
+                        sans: ['SN Pro', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'SN Pro', sans-serif; }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover { background-color: #f3f4f6; }
+        .sidebar-link.active { background-color: #1a425f; color: white; }
+        .code-block { background: #1e293b; color: #10b981; }
+        .gradient-header { background: linear-gradient(135deg, #1a425f 0%, #0f2a3d 100%); }
+    </style>
+</head>
+<body class="bg-light-bg">
+    <!-- Header Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="images/casms-logo.png" alt="Logo" class="h-12">
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="installation.html" class="text-primary-blue border-b-2 border-primary-blue pb-1">
+                        <i class="fas fa-download mr-2"></i>Installation Guide
+                    </a>
+                    <a href="user-guide.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-user mr-2"></i>User Guide
+                    </a>
+                    <a href="admin-guide.html" class="text-gray-700 hover:text-primary-blue transition">
+                        <i class="fas fa-user-shield mr-2"></i>Admin Guide
+                    </a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-3">
+            <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-home mr-2"></i>Home</a>
+            <a href="installation.html" class="block px-4 py-2 text-primary-blue bg-blue-50 rounded"><i class="fas fa-download mr-2"></i>Installation</a>
+            <a href="user-guide.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-user mr-2"></i>User Guide</a>
+            <a href="admin-guide.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-50 rounded"><i class="fas fa-user-shield mr-2"></i>Admin Guide</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="gradient-header text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl mb-3 flex items-center">
+                <i class="fas fa-download mr-4"></i>Installation Guide
+            </h1>
+            <p class="text-xl text-blue-100">Step-by-step instructions to install and configure Client Approval & Sign-Off Management System</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-12 gap-8">
+            <!-- Sidebar -->
+            <aside class="col-span-12 md:col-span-3">
+                <div class="bg-white rounded-lg shadow-md p-4 sticky top-24">
+                    <nav class="space-y-1">
+                        <a href="#requirements" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-list-check w-5 mr-2"></i>Requirements
+                        </a>
+                        <a href="#download" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-cloud-download-alt w-5 mr-2"></i>Download & Extract
+                        </a>
+                        <a href="#upload" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-upload w-5 mr-2"></i>Upload Files
+                        </a>
+                        <a href="#dependencies" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-boxes w-5 mr-2"></i>Install Dependencies
+                        </a>
+                        <a href="#permissions" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-lock-open w-5 mr-2"></i>Set Permissions
+                        </a>
+                        <a href="#installer" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-magic w-5 mr-2"></i>Web Installer
+                        </a>
+                        <a href="#configuration" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-cog w-5 mr-2"></i>Configuration
+                        </a>
+                        <a href="#troubleshooting" class="sidebar-link block px-3 py-2 text-primary-blue rounded">
+                            <i class="fas fa-wrench w-5 mr-2"></i>Troubleshooting
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="col-span-12 md:col-span-9">
+                <!-- Requirements Section -->
+                <section id="requirements" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-list-check text-primary-blue mr-3"></i>
+                        System Requirements
+                    </h2>
+                    
+                    <p class="text-gray-700 mb-6">Before installing Client Approval & Sign-Off Management System, ensure your server meets these requirements:</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="border border-border-gray rounded-lg p-6">
+                            <h3 class="text-xl text-primary-blue mb-4 flex items-center">
+                                <i class="fas fa-server mr-3"></i>Server Requirements
+                            </h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>PHP:</strong> 8.2+ or higher</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Web Server:</strong> Apache 2.4+ or Nginx 1.20+</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Database:</strong> MySQL 5.7+ or MariaDB 10.3+</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Composer:</strong> 2.x</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span><strong>Node.js:</strong> 18+ with NPM</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-6">
+                            <h3 class="text-xl text-approval-green mb-4 flex items-center">
+                                <i class="fas fa-puzzle-piece mr-3"></i>PHP Extensions
+                            </h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span>BCMath</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span>Ctype, Fileinfo, JSON</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span>Mbstring, PDO, Tokenizer</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span>XML, DOM, OpenSSL</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-approval-green mt-1 mr-3"></i>
+                                    <span>GD or Imagick (for images)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-blue-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-2">Checking Requirements</h4>
+                                <p class="text-gray-700">The Client Approval & Sign-Off Management System web installer will automatically check all requirements when you access it for the first time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Download Section -->
+                <section id="download" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-cloud-download-alt text-primary-blue mr-3"></i>
+                        Download & Extract
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-primary-blue bg-blue-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-3">Step 1: Download Client Approval & Sign-Off Management System</h3>
+                            <p class="text-gray-700 mb-4">Download the Client Approval & Sign-Off Management System package from your purchase location (email, etc.).</p>
+                            <div class="code-block p-4 rounded-lg text-sm overflow-x-auto">
+<pre>casms-v1.0.0.zip</pre>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-approval-green bg-green-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-3">Step 2: Extract Files</h3>
+                            <p class="text-gray-700 mb-4">Extract the ZIP file to your local computer:</p>
+                            <div class="code-block p-4 rounded-lg text-sm overflow-x-auto">
+<pre># On Linux/Mac
+unzip casms-v1.0.0.zip
+
+# On Windows
+Right-click > Extract All...</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upload Section -->
+                <section id="upload" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-upload text-primary-blue mr-3"></i>
+                        Upload Files to Server
+                    </h2>
+
+                    <div class="mb-6">
+                        <p class="text-gray-700 mb-4">Upload all extracted files to your web server root directory:</p>
+                        <ul class="space-y-2 text-gray-700 ml-6">
+                            <li><i class="fas fa-folder text-approval-green mr-2"></i><code class="bg-gray-100 px-2 py-1 rounded">/public_html/</code> (cPanel/shared hosting)</li>
+                            <li><i class="fas fa-folder text-approval-green mr-2"></i><code class="bg-gray-100 px-2 py-1 rounded">/var/www/html/</code> (VPS/dedicated server)</li>
+                            <li><i class="fas fa-folder text-approval-green mr-2"></i><code class="bg-gray-100 px-2 py-1 rounded">/home/username/public_html/</code> (custom setup)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-2">Important Note</h4>
+                                <p class="text-gray-700">The <code class="bg-yellow-100 px-2 py-1 rounded">public</code> folder should be your web root. Configure your domain to point to the <code class="bg-yellow-100 px-2 py-1 rounded">public</code> directory for better security.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl text-dark-text mb-4">Upload Methods:</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-border-gray rounded-lg p-6">
+                            <h4 class="text-primary-blue mb-3 flex items-center">
+                                <i class="fas fa-server mr-2"></i>FTP/SFTP
+                            </h4>
+                            <p class="text-gray-700 text-sm mb-3">Using FileZilla, WinSCP, or similar:</p>
+                            <ol class="text-sm text-gray-700 space-y-2 list-decimal list-inside">
+                                <li>Connect to your server</li>
+                                <li>Navigate to web root</li>
+                                <li>Upload all files</li>
+                                <li>Wait for transfer to complete</li>
+                            </ol>
+                        </div>
+
+                        <div class="border border-border-gray rounded-lg p-6">
+                            <h4 class="text-approval-green mb-3 flex items-center">
+                                <i class="fas fa-terminal mr-2"></i>SSH/Command Line
+                            </h4>
+                            <p class="text-gray-700 text-sm mb-3">Via terminal:</p>
+                            <div class="code-block p-3 rounded text-xs overflow-x-auto">
+<pre>scp casms-v1.0.0.zip user@server:/path/
+ssh user@server
+cd /path/
+unzip casms-v1.0.0.zip</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Dependencies Section -->
+                <section id="dependencies" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-boxes text-primary-blue mr-3"></i>
+                        Install Dependencies
+                    </h2>
+
+                    <p class="text-gray-700 mb-6"><div class="bg-yellow-50 border border-yellow-200 p-3 rounded mb-4"><p class="text-sm"><i class="fas fa-exclamation-triangle text-yellow-600 mr-2"></i><strong>Optional:</strong> You can skip this section and use the web installer directly. Dependencies can be installed after installation if needed.</p></div>
+
+If you want to pre-install dependencies, SSH into your server and run:</p>
+
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-primary-blue bg-blue-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-3 flex items-center">
+                                <i class="fab fa-php mr-2"></i>Install PHP Dependencies
+                            </h3>
+                            <div class="code-block p-4 rounded-lg overflow-x-auto">
+<pre># Navigate to project directory
+cd /var/www/html/casms
+
+# Install Composer dependencies (production)
+composer install --no-dev --optimize-autoloader
+
+# For development (includes testing tools)
+composer install</pre>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-approval-green bg-green-50 p-6 rounded">
+                            <h3 class="text-xl text-dark-text mb-3 flex items-center">
+                                <i class="fab fa-node-js mr-2"></i>Install Node Dependencies & Build Assets
+                            </h3>
+                            <div class="code-block p-4 rounded-lg overflow-x-auto">
+<pre># Install NPM packages
+npm install
+
+# Build production assets
+npm run build
+
+# For development with hot reload
+npm run dev</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded mt-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-2">Success Indicators</h4>
+                                <p class="text-gray-700">You should see <code class="bg-green-100 px-2 py-1 rounded">vendor/</code> and <code class="bg-green-100 px-2 py-1 rounded">node_modules/</code> directories created, and compiled assets in <code class="bg-green-100 px-2 py-1 rounded">public/build/</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Permissions Section -->
+                <section id="permissions" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-lock-open text-primary-blue mr-3"></i>
+                        Set File Permissions
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Laravel requires write permissions for certain directories:</p>
+
+                    <div class="code-block p-4 rounded-lg mb-6 overflow-x-auto">
+<pre># Make storage and cache writable
+chmod -R 775 storage bootstrap/cache
+
+# Set proper ownership (replace www-data with your web server user)
+chown -R www-data:www-data storage bootstrap/cache
+
+# Alternative: using current user and web server group
+chown -R $USER:www-data storage bootstrap/cache</pre>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                        <div class="flex items-start">
+                            <i class="fas fa-shield-alt text-yellow-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-2">Security Note</h4>
+                                <p class="text-gray-700 mb-2">Never set permissions to 777 in production. Use 755 for directories and 644 for files, except for storage and cache which need 775.</p>
+                                <div class="mt-3 text-sm">
+                                    <p class="mb-1">Recommended permissions:</p>
+                                    <ul class="space-y-1 ml-4">
+                                        <li><i class="fas fa-check mr-2 text-yellow-600"></i>Directories: 755</li>
+                                        <li><i class="fas fa-check mr-2 text-yellow-600"></i>Files: 644</li>
+                                        <li><i class="fas fa-check mr-2 text-yellow-600"></i>storage/ and bootstrap/cache/: 775</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Web Installer Section -->
+                <section id="installer" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-magic text-primary-blue mr-3"></i>
+                        Web Installer Wizard
+                    </h2>
+
+                    <p class="text-gray-700 mb-6">Client Approval & Sign-Off Management System includes a user-friendly web installer that handles all configuration automatically.</p> 
+                    <p class="text-gray-700 mb-6">Execute the below commands to start the installation steps.</p>
+                    <div class="code-block p-4 rounded-lg mb-6 overflow-x-auto">
+<pre># Copy the example environment file to create your actual .env file
+cp .env.example .env
+
+# Generate the application encryption key
+php artisan key:generate
+
+# Clear and refresh the configuration cache.
+php artisan config:clear
+</pre>
+                    </div>
+                    
+                    <p>Simply navigate to your domain to begin:</p>
+
+                    <div class="code-block p-4 rounded-lg mb-6 text-lg">
+                        <pre>https://yourdomain.com/installer</pre>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Step 1 -->
+                        <div class="border-l-4 border-blue-500 bg-blue-50 p-6 rounded">
+                            <div class="flex items-start">
+                                <div class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">1</div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl text-dark-text mb-3">Welcome & Requirements Check</h3>
+                                    <p class="text-gray-700 mb-3">The installer will automatically verify:</p>
+                                    <ul class="space-y-2 text-gray-700">
+                                        <li><i class="fas fa-check-circle text-approval-green mr-2"></i>PHP version (8.2+)</li>
+                                        <li><i class="fas fa-check-circle text-approval-green mr-2"></i>Required PHP extensions</li>
+                                        <li><i class="fas fa-check-circle text-approval-green mr-2"></i>Directory permissions</li>
+                                        <li><i class="fas fa-check-circle text-approval-green mr-2"></i>Apache/Nginx configuration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="border-l-4 border-purple-500 bg-purple-50 p-6 rounded">
+                            <div class="flex items-start">
+                                <div class="bg-purple-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">2</div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl text-dark-text mb-3">Database Configuration</h3>
+                                    <p class="text-gray-700 mb-3">Enter your database details:</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <label class="block mb-1">Database Host</label>
+                                            <code class="block bg-white px-3 py-2 rounded border">localhost or 127.0.0.1</code>
+                                        </div>
+                                        <div>
+                                            <label class="block mb-1">Database Port</label>
+                                            <code class="block bg-white px-3 py-2 rounded border">3306 (MySQL)</code>
+                                        </div>
+                                        <div>
+                                            <label class="block mb-1">Database Name</label>
+                                            <code class="block bg-white px-3 py-2 rounded border">casms_db</code>
+                                        </div>
+                                        <div>
+                                            <label class="block mb-1">Database User</label>
+                                            <code class="block bg-white px-3 py-2 rounded border">your_db_user</code>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 bg-purple-100 p-3 rounded">
+                                        <p class="text-sm"><strong>Note:</strong> You must create an empty database before installation. The installer will create tables automatically.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="border-l-4 border-approval-green bg-green-50 p-6 rounded">
+                            <div class="flex items-start">
+                                <div class="bg-approval-green text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">3</div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl text-dark-text mb-3">Database Migration</h3>
+                                    <p class="text-gray-700 mb-3">The installer will:</p>
+                                    <ul class="space-y-2 text-gray-700">
+                                        <li><i class="fas fa-database text-approval-green mr-2"></i>Run database migrations (12 tables)</li>
+                                        <li><i class="fas fa-seed text-approval-green mr-2"></i>Optionally seed sample data</li>
+                                        <li><i class="fas fa-user-shield text-approval-green mr-2"></i>Create default roles & permissions</li>
+                                        <li><i class="fas fa-envelope text-approval-green mr-2"></i>Install email templates</li>
+                                    </ul>
+                                    <div class="mt-4 bg-green-100 p-3 rounded">
+                                        <p class="text-sm"><strong>Recommended:</strong> Check "Install sample data" for testing and demo purposes. You can delete it later.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="border-l-4 border-orange-500 bg-orange-50 p-6 rounded">
+                            <div class="flex items-start">
+                                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">4</div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl text-dark-text mb-3">Admin Account Creation</h3>
+                                    <p class="text-gray-700 mb-3">Create your administrator account:</p>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-user w-6 text-orange-600 mr-2"></i>
+                                            <span>Full name</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-envelope w-6 text-orange-600 mr-2"></i>
+                                            <span>Email address (for login)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-lock w-6 text-orange-600 mr-2"></i>
+                                            <span>Password (minimum 8 characters)</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 bg-orange-100 p-3 rounded">
+                                        <p class="text-sm"><strong>Security:</strong> Use a strong password with letters, numbers, and symbols. This account will have full system access.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="border-l-4 border-primary-blue bg-blue-50 p-6 rounded">
+                            <div class="flex items-start">
+                                <div class="bg-primary-blue text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">5</div>
+                                <div class="flex-1">
+                                    <h3 class="text-xl text-dark-text mb-3">Installation Complete!</h3>
+                                    <p class="text-gray-700 mb-3">Congratulations! Client Approval & Sign-Off Management System is now installed. You'll be redirected to the login page.</p>
+                                    <div class="bg-blue-100 p-4 rounded mt-3">
+                                        <p class="mb-2">Next steps:</p>
+                                        <ol class="list-decimal list-inside space-y-1 text-sm">
+                                            <li>Login with your admin credentials</li>
+                                            <li>Configure email settings in .env file</li>
+                                            <li>Customize email templates</li>
+                                            <li>Create additional users and assign roles</li>
+                                            <li>Start adding your clients!</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-cog text-primary-blue mr-3"></i>
+                        Post-Installation Configuration
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl text-dark-text mb-3">Email Configuration (SMTP)</h3>
+                            <p class="text-gray-700 mb-3">Edit <code class="bg-gray-100 px-2 py-1 rounded">.env</code> file to configure email sending:</p>
+                            <div class="code-block p-4 rounded-lg overflow-x-auto">
+<pre>MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+MAIL_FROM_NAME="${APP_NAME}"</pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl text-dark-text mb-3">Application URL</h3>
+                            <p class="text-gray-700 mb-3">Set your application URL in <code class="bg-gray-100 px-2 py-1 rounded">.env</code>:</p>
+                            <div class="code-block p-4 rounded-lg">
+<pre>APP_URL=https://yourdomain.com</pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl text-dark-text mb-3">Cache Configuration</h3>
+                            <p class="text-gray-700 mb-3">After any configuration changes, clear the cache:</p>
+                            <div class="code-block p-4 rounded-lg overflow-x-auto">
+<pre>php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+
+# Or clear all at once
+php artisan optimize:clear</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Troubleshooting Section -->
+                <section id="troubleshooting" class="mb-12 bg-white rounded-lg shadow-md p-8">
+                    <h2 class="text-3xl text-dark-text mb-6 flex items-center">
+                        <i class="fas fa-wrench text-primary-blue mr-3"></i>
+                        Common Installation Issues
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="border border-red-200 rounded-lg p-6 bg-red-50">
+                            <h3 class="text-red-800 mb-3 flex items-center">
+                                <i class="fas fa-exclamation-circle mr-2"></i>500 Internal Server Error
+                            </h3>
+                            <p class="text-gray-700 mb-2"><strong>Cause:</strong> Permissions or .htaccess issue</p>
+                            <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+                            <div class="code-block p-3 rounded text-sm overflow-x-auto">
+<pre># Fix storage permissions
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+
+# Ensure .htaccess exists in public/ directory
+# Enable Apache mod_rewrite module
+# The installer will create .env automatically</pre>
+                            </div>
+                        </div>
+
+                        <div class="border border-yellow-200 rounded-lg p-6 bg-yellow-50">
+                            <h3 class="text-yellow-800 mb-3 flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Blank White Page
+                            </h3>
+                            <p class="text-gray-700 mb-2"><strong>Cause:</strong> Missing .env file or APP_KEY</p>
+                            <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+                            <div class="code-block p-3 rounded text-sm overflow-x-auto">
+<pre># Simply access the web installer:
+# Visit: https://yourdomain.com/installer
+# The installer will create .env automatically
+
+# If that doesn't work, check permissions:
+chmod -R 775 storage bootstrap/cache</pre>
+                            </div>
+                        </div>
+
+                        <div class="border border-blue-200 rounded-lg p-6 bg-blue-50">
+                            <h3 class="text-blue-800 mb-3 flex items-center">
+                                <i class="fas fa-database mr-2"></i>Database Connection Failed
+                            </h3>
+                            <p class="text-gray-700 mb-2"><strong>Cause:</strong> Incorrect credentials or database doesn't exist</p>
+                            <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+                            <ul class="space-y-2 text-gray-700 text-sm">
+                                <li><i class="fas fa-check mr-2 text-blue-600"></i>Verify database credentials in .env</li>
+                                <li><i class="fas fa-check mr-2 text-blue-600"></i>Ensure database exists (create it if not)</li>
+                                <li><i class="fas fa-check mr-2 text-blue-600"></i>Check if MySQL/PostgreSQL is running</li>
+                                <li><i class="fas fa-check mr-2 text-blue-600"></i>Test connection: <code class="bg-blue-100 px-2 py-1 rounded">php artisan db:show</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-purple-200 rounded-lg p-6 bg-purple-50">
+                            <h3 class="text-purple-800 mb-3 flex items-center">
+                                <i class="fas fa-code mr-2"></i>Assets Not Loading (CSS/JS)
+                            </h3>
+                            <p class="text-gray-700 mb-2"><strong>Cause:</strong> Assets not compiled or wrong path</p>
+                            <p class="text-gray-700 mb-3"><strong>Solution:</strong></p>
+                            <div class="code-block p-3 rounded text-sm overflow-x-auto">
+<pre>npm install
+npm run build
+# Verify APP_URL in .env matches your domain
+php artisan config:clear</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded mt-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-life-ring text-green-500 text-xl mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="text-gray-800 mb-2">Still Having Issues?</h4>
+                                <p class="text-gray-700">Enable debug mode temporarily to see detailed errors:</p>
+                                <div class="code-block p-2 rounded text-sm mt-2">
+<pre>APP_DEBUG=true  # In .env - ONLY for troubleshooting!</pre>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2"><strong>Remember:</strong> Always set <code>APP_DEBUG=false</code> in production!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Next Steps -->
+                <section class="bg-gradient-to-r from-primary-blue to-blue-900 text-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl mb-6 flex items-center">
+                        <i class="fas fa-rocket mr-3"></i>
+                        Next Steps
+                    </h2>
+                    <p class="text-blue-100 mb-6">Installation complete! Here's what to do next:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <a href="user-guide.html" class="block bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-6 transition">
+                            <h3 class="text-xl mb-2 flex items-center">
+                                <i class="fas fa-user mr-3 text-approval-green"></i>User Guide
+                            </h3>
+                            <p class="text-blue-100 text-sm">Learn how to manage clients and approval requests</p>
+                        </a>
+                        <a href="admin-guide.html" class="block bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg p-6 transition">
+                            <h3 class="text-xl mb-2 flex items-center">
+                                <i class="fas fa-user-shield mr-3 text-approval-green"></i>Admin Guide
+                            </h3>
+                            <p class="text-blue-100 text-sm">Configure users, roles, and system settings</p>
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary-blue text-white py-6">
+        <div class="text-center text-blue-200">
+            <p>&copy; 2026 Client Approval & Sign-Off Management System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Sidebar active state
+        const links = document.querySelectorAll('.sidebar-link');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                links.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Highlight active section on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPos = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    links.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
